@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use common\enums\user\UserStatusEnum;
 use common\fixtures\UserFixture;
 use frontend\tests\FunctionalTester;
 
@@ -62,7 +63,7 @@ class VerifyEmailCest
         $I->seeRecord('common\models\User', [
            'username' => 'test.test',
            'email' => 'test@mail.com',
-           'status' => \common\models\User::STATUS_ACTIVE
+           'status' => UserStatusEnum::active->value
         ]);
     }
 }

@@ -1,0 +1,38 @@
+###
+POST http://api.template/v1/auth/logout
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3N1ZXIiOiJodHRwczovL2V4YW1wbGUub3JnIiwiYXVkaWVuY2UiOiJodHRwczovL2V4YW1wbGUuY29tIiwiaXNzdWVkX2F0IjoxNzEzMDUwMzEwLCJleHBpcmUiOjE3MTMwNTA2MTAsInVzZXJfaWQiOjExfQ.3P55Vph1x0P12jhEU1oM0YdTspAZpWmLE2fb5X65xwo
+Content-Type: application/json
+
+{
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3N1ZXIiOiJodHRwczovL2V4YW1wbGUub3JnIiwiYXVkaWVuY2UiOiJodHRwczovL2V4YW1wbGUuY29tIiwiaXNzdWVkX2F0IjoxNzEzMDUwMzEwLCJleHBpcmUiOjE3MTU2NDIzMTAsInVzZXJfaWQiOjExfQ.GY_3P7sxHOUeWLa5JUW5CBJmfoCoxXiYE3zCwYtk9-s"
+}
+
+###
+POST http://api.template/v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3N1ZXIiOiJodHRwczovL2V4YW1wbGUub3JnIiwiYXVkaWVuY2UiOiJodHRwczovL2V4YW1wbGUuY29tIiwiaXNzdWVkX2F0IjoxNzEzMDQ3MTEzLCJleHBpcmUiOjE3MTU2MzkxMTMsInVzZXJfaWQiOjExfQ.H9j3rnd3RP0E8QhlpOIm2BBBNlVC5714-GyLSqRnRho"
+}
+
+###
+POST http://api.template/v1/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "qw888ge57558@qwe.rou",
+  "password": "12345678"
+}
+
+###
+POST http://api.template/v1/auth/auth/login
+Content-Type: application/json
+
+{
+  "email": "qw888e57558@qwe.ru",
+  "password": "12345678"
+}
+
+###
+OPTIONS http://api.template/v1/base/options
+Content-Type: application/json

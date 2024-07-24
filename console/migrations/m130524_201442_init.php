@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use yii\db\Migration;
 
 class m130524_201442_init extends Migration
 {
-    public function up()
+    /**
+     * @return void
+     */
+    public function up(): void
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -13,20 +18,24 @@ class m130524_201442_init extends Migration
         }
 
         $this->createTable('{{%user}}', [
-            'id' => $this->primaryKey(),
-            'username' => $this->string()->notNull()->unique(),
-            'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
-            'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
-
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'id' => $this->primaryKey()->comment('Уникальный идентификатор'),
+            'username' => $this->string()->notNull()->unique()->comment('Никнейм'),
+            'auth_key' => $this->string(32)->notNull()->comment('Ключ авторизации'),
+            'password_hash' => $this->string()->notNull()->comment('Хэш пароля'),
+            'password_reset_token' => $this->string()->unique()->comment('Токен сброса пароля'),
+            'email' => $this->string()->notNull()->unique()->comment('Электронная почта'),
+            'status' => $this->smallInteger()->notNull()->defaultValue(10)->comment('Статус'),
+            'created_at' => $this->integer()->notNull()->comment('Время создания'),
+            'updated_at' => $this->integer()->notNull()->comment('Время обновления'),
         ], $tableOptions);
+
+        $this->addCommentOnTable('user', 'Пользователь');
     }
 
-    public function down()
+    /**
+     * @return void
+     */
+    public function down(): void
     {
         $this->dropTable('{{%user}}');
     }

@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use common\enums\user\UserStatusEnum;
 use frontend\tests\FunctionalTester;
 
 class SignupCest
@@ -50,7 +51,7 @@ class SignupCest
         $I->seeRecord('common\models\User', [
             'username' => 'tester',
             'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'status' => UserStatusEnum::inactive->value
         ]);
 
         $I->seeEmailIsSent();
