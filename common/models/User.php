@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace common\models;
 
 use api\helpers\JwtHelper;
+use common\base\ActiveRecord;
 use common\enums\user\UserStatusEnum;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**

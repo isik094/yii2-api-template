@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace common\models;
 
+use common\base\ActiveRecord;
 use yii\db\ActiveQuery;
 
 /**
@@ -18,7 +19,7 @@ use yii\db\ActiveQuery;
  *
  * @property User $user
  */
-class Token extends \yii\db\ActiveRecord
+class Token extends ActiveRecord
 {
     /**
      * {@inheritdoc}

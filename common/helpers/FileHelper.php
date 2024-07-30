@@ -16,10 +16,10 @@ use yii\helpers\FileHelper as YiiFileHelper;
 class FileHelper extends YiiFileHelper
 {
     /** @var int Максимальное количество попыток сгенерировать уникальное название файла */
-    private const int MAX_ATTEMPTS = 100;
+    private const MAX_ATTEMPTS = 100;
 
     /** @var string Название алиаса */
-    private const string PATH_ALIAS_NAME = '@uploads';
+    private const PATH_ALIAS_NAME = '@uploads';
 
     /**
      * Сгенерировать уникальное название файла
@@ -37,12 +37,13 @@ class FileHelper extends YiiFileHelper
         }
 
         $counter = 1;
+        $originalFilename = $filename;
         while (file_exists("{$path}/{$filename}.{$extension}")) {
             if ($counter > self::MAX_ATTEMPTS) {
                 throw new \Exception('Unable to generate a unique filename after ' . self::MAX_ATTEMPTS . ' attempts.');
             }
 
-            $filename = "{$filename}({$counter})";
+            $filename = "$originalFilename($counter)";
             $counter++;
         }
 
@@ -68,8 +69,8 @@ class FileHelper extends YiiFileHelper
         }
 
         $fullPathDir = Yii::getAlias(self::PATH_ALIAS_NAME . "/$path");
-        if (!is_dir($fullPathDir) || !is_writable($fullPathDir)) {
-            throw new \Exception("The directory does not exist or is not writable: {$fullPathDir}");
+        if (!is_dir($fullPathDir) || !is_readable($fullPathDir) || !is_writable($fullPathDir)) {
+            parent::createDirectory($fullPathDir);
         }
 
         try {
@@ -84,7 +85,7 @@ class FileHelper extends YiiFileHelper
             return false;
         }
 
-        return "$path/$filename";
+        return "/$path/$filename";
     }
 
     /**

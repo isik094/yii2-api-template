@@ -45,5 +45,8 @@ phpunit.phar
 /api/web/index-test.php
 /api/web/robots.txt
 
+# ignore uploads directory
+/api/uploads
+
 # ignore .env
 .env

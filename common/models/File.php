@@ -1,32 +1,32 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace common\models;
 
-use common\base\ActiveRecord;
-use yii\db\ActiveQuery;
-
 /**
- * This is the model class for table "invalid_token".
+ * This is the model class for table "file".
  *
  * @property int $id Уникальный идентификатор
- * @property int|null $user_id Id пользователя
- * @property string $token Акесес jwt токен
- * @property string|null $ip IP пользователя
- * @property string|null $user_agent Пользовательский агент
+ * @property int|null $user_id ID пользователя
+ * @property int $entity Тип сущности
+ * @property int $entity_id ID сущности
+ * @property string $path Путь
  * @property int|null $created_at Время создания
  *
  * @property User $user
  */
-class InvalidToken extends ActiveRecord
+class File extends \common\base\ActiveRecord
 {
+    /** @var int Файлы пользователя */
+    public const USER_FILE = 1;
+
     /**
      * {@inheritdoc}
      */
     public static function tableName(): string
     {
-        return 'invalid_token';
+        return 'file';
     }
 
     /**
@@ -35,12 +35,9 @@ class InvalidToken extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['user_id', 'token'], 'required'],
-            [['user_id', 'created_at'], 'integer'],
-            [['user_agent'], 'string'],
-            [['token'], 'string', 'max' => 400],
-            [['ip'], 'string', 'max' => 40],
-            [['token'], 'unique'],
+            [['user_id', 'entity', 'entity_id', 'created_at'], 'integer'],
+            [['entity', 'entity_id', 'path'], 'required'],
+            [['path'], 'string', 'max' => 400],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -53,9 +50,9 @@ class InvalidToken extends ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'token' => 'Token',
-            'ip' => 'Ip',
-            'user_agent' => 'User Agent',
+            'entity' => 'Entity',
+            'entity_id' => 'Entity ID',
+            'path' => 'Path',
             'created_at' => 'Created At',
         ];
     }
@@ -63,9 +60,9 @@ class InvalidToken extends ActiveRecord
     /**
      * Gets query for [[User]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getUser(): ActiveQuery
+    public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
